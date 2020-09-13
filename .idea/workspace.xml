@@ -9,7 +9,17 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea7ad3de-d548-4bbe-b44f-02a02c46089f" name="Default Changelist" comment="" />
+    <list default="true" id="ea7ad3de-d548-4bbe-b44f-02a02c46089f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/notimplementedlife/sudoku/SudokuCell.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/notimplementedlife/sudoku/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/notimplementedlife/sudoku/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/notimplementedlife/sudoku/SudokuView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/notimplementedlife/sudoku/SudokuView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +45,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1hRf5yGPmKDYFoE5QjVARF0RayI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -43,7 +56,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -124,26 +139,26 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1557" height="221" key="GridCell.Tab.0.bottom" timestamp="1600002093993">
+    <state width="1557" height="221" key="GridCell.Tab.0.bottom" timestamp="1600008710003">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1600002093993" />
-    <state width="1557" height="221" key="GridCell.Tab.0.center" timestamp="1600002093993">
+    <state width="1557" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1600008710003" />
+    <state width="1557" height="221" key="GridCell.Tab.0.center" timestamp="1600008710002">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1600002093993" />
-    <state width="1557" height="221" key="GridCell.Tab.0.left" timestamp="1600002093993">
+    <state width="1557" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1600008710002" />
+    <state width="1557" height="221" key="GridCell.Tab.0.left" timestamp="1600008710002">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1600002093993" />
-    <state width="1557" height="221" key="GridCell.Tab.0.right" timestamp="1600002093993">
+    <state width="1557" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1600008710002" />
+    <state width="1557" height="221" key="GridCell.Tab.0.right" timestamp="1600008710003">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1600002093993" />
-    <state x="495" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1599986622426">
+    <state width="1557" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1600008710003" />
+    <state x="495" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1600004526817">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="495" y="253" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1599986622426" />
+    <state x="495" y="253" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1600004526817" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1599995838921">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

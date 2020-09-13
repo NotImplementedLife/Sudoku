@@ -1,25 +1,27 @@
 package com.notimplementedlife.sudoku
 
 import android.R
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
-import java.time.Duration
 
 
 class SudokuView : View {
     var boardLinesColor : Int = ResourcesCompat.getColor(resources, R.color.holo_red_dark, null)
 
-    var boardLinePaint0 : Paint
-    var boardLinePaint1 : Paint
+    lateinit var boardLinePaint0 : Paint
+    lateinit var boardLinePaint1 : Paint
 
-    constructor(context: Context) : this(context,null) { }
-    constructor(context :Context, attributeSet : AttributeSet?) : super(context) {
+    //constructor(context: Context) : this(context,null) { }
+    constructor(context :Context, attributeSet : AttributeSet?) : super(context,attributeSet) {
         val backgroundColor: Int
 
         boardLinePaint0 = Paint()
@@ -43,6 +45,7 @@ class SudokuView : View {
     lateinit var board : Bitmap
     private var translateX : Float =0f
     private var translateY : Float =0f
+    private var s9 : Float = 1f
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldWidth, oldHeight)
@@ -53,7 +56,7 @@ class SudokuView : View {
         translateX=(width-s)*0.5f-6
         translateY=(height-s)*0.5f
         canvas.translate(translateX,translateY)
-        val s9:Float = s/9F;
+        s9 = s/9F;
 
         for(r in 0..9) {
             val hline=Path()
@@ -74,4 +77,23 @@ class SudokuView : View {
         super.onDraw(canvas)
         canvas.drawBitmap(board, 0f, 0f, null)
     }
+
+    val cells : Array<SudokuCell> = Array(81) {i -> SudokuCell(i / 9,i % 9) }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val location = IntArray(2)
+            getLocationOnScreen(location)
+            val absLeft = location[0]
+            val absTop = location[1]
+            val col=((event.rawX-absLeft-translateX)/s9).toInt()
+            val row=((event.rawY-absTop-translateY)/s9).toInt()
+            if(row<0 || row>8 || col<0 || col>8) return false
+            onCellTouch?.invoke(cells[9 * row + col])
+        }
+        return false
+    }
+
+    var onCellTouch :((cell:SudokuCell)->Unit)? = null
 }

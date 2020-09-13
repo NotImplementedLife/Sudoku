@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
@@ -34,9 +35,38 @@ class MainActivity : AppCompatActivity() {
         selectActionButton(abNoAct)
 
         numButtons=Array<NumberButton>(9) {it->
-                NumberButton(findViewById(resources.getIdentifier("btn_num_${it+1}", "id", packageName)))
+                NumberButton(findViewById(resources.getIdentifier("btn_num_${it+1}", "id", packageName)),it+1)
+        }
+
+        sudokuView=findViewById(R.id.sudoku_view)
+        sudokuView.onCellTouch= this::executeOperation
+
+    }
+
+    lateinit var sudokuView : SudokuView
+    fun executeOperation(cell : SudokuCell) {
+        val action = cellAction
+        if(action == cellWrite || action == cellNotes) {
+            if(nbSelected!=null) {
+                val number = nbSelected!!.number
+                Toast.makeText(this,"$action $number",Toast.LENGTH_SHORT).show()
+            }
+        }
+        else {
+            Toast.makeText(this,"$action",Toast.LENGTH_SHORT).show()
         }
     }
+
+    val cellAction : Int
+        get() {
+            when(abSelected) {
+                abNoAct -> return cellNoAct
+                abWrite -> return cellWrite
+                abNotes -> return cellNotes
+                abClear -> return cellClear
+            }
+            return cellNoAct
+        }
 
     var abSelected : ActionButton? = null
 
@@ -81,12 +111,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class NumberButton(btn: Button) {
+    inner class NumberButton(btn: Button, num : Int) {
         var view : Button=btn
+        var number : Int = num
         init {
             view.setOnClickListener{
                 selectNumberButton(this)
             }
         }
+    }
+
+    companion object {
+        const val cellNoAct : Int = 0
+        const val cellWrite : Int = 1
+        const val cellNotes : Int = 2
+        const val cellClear : Int = 3
     }
 }

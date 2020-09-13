@@ -60,10 +60,10 @@
         </LinearLayout>
 
         <com.notimplementedlife.sudoku.SudokuView
+            android:id="@+id/sudoku_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FBC02D" />
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/numpad"
