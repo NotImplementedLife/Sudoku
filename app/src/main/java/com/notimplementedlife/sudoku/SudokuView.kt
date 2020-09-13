@@ -3,10 +3,7 @@ package com.notimplementedlife.sudoku
 import android.R
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -17,10 +14,12 @@ import androidx.core.content.res.ResourcesCompat
 class SudokuView : View {
     var boardLinesColor : Int = ResourcesCompat.getColor(resources, R.color.holo_red_dark, null)
 
-    lateinit var boardLinePaint0 : Paint
-    lateinit var boardLinePaint1 : Paint
+    var boardLinePaint0 : Paint
+    var boardLinePaint1 : Paint
 
-    //constructor(context: Context) : this(context,null) { }
+    var numberPaint0 : Paint
+    var numberPaint1 : Paint
+
     constructor(context :Context, attributeSet : AttributeSet?) : super(context,attributeSet) {
         val backgroundColor: Int
 
@@ -40,6 +39,15 @@ class SudokuView : View {
         boardLinePaint1.strokeCap = Paint.Cap.ROUND
         boardLinePaint1.strokeWidth = 6F
 
+        numberPaint0 = Paint()
+        numberPaint0.color = Color.BLACK
+        numberPaint0.style = Paint.Style.FILL
+        numberPaint0.textSize = 30f
+
+        numberPaint1 = Paint()
+        numberPaint1.color = Color.BLACK
+        numberPaint1.style = Paint.Style.FILL
+        numberPaint1.textSize = 10f
     }
 
     lateinit var board : Bitmap
@@ -71,11 +79,37 @@ class SudokuView : View {
             vline.lineTo(c*s9,s)
             canvas.drawPath(vline,if(c%3==0) boardLinePaint0 else boardLinePaint1)
         }
+
+        numberPaint0.textSize = s9*0.75f
+        numberPaint1.textSize = s9*0.3f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawBitmap(board, 0f, 0f, null)
+        canvas.translate(translateX,translateY)
+
+        for(i in 0..80) {
+            val cell=cells[i]
+            val row = i / 9
+            var col = i % 9
+            if(!cell.isNote) {
+                canvas.drawText(cell.value.toString(),col*s9+s9*0.3f,row*s9+s9*0.75f,numberPaint0)
+            }
+            else {
+                var k=0
+                var v=cell.value
+                while(v>0) {
+                    if(v%2==1) {
+                        val r=(k-1)/3
+                        val c=(k-1)%3
+                        canvas.drawText(k.toString(),col*s9+0.08f*s9+c*0.3f*s9,row*s9+(r+1)*0.3f*s9,numberPaint1)
+                    }
+                    v/=2
+                    k++
+                }
+            }
+        }
     }
 
     val cells : Array<SudokuCell> = Array(81) {i -> SudokuCell(i / 9,i % 9) }
@@ -91,6 +125,7 @@ class SudokuView : View {
             val row=((event.rawY-absTop-translateY)/s9).toInt()
             if(row<0 || row>8 || col<0 || col>8) return false
             onCellTouch?.invoke(cells[9 * row + col])
+            invalidate()
         }
         return false
     }

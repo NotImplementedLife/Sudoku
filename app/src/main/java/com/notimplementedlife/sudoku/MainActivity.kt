@@ -49,11 +49,25 @@ class MainActivity : AppCompatActivity() {
         if(action == cellWrite || action == cellNotes) {
             if(nbSelected!=null) {
                 val number = nbSelected!!.number
-                Toast.makeText(this,"$action $number",Toast.LENGTH_SHORT).show()
+                if(!cell.isFixed && action == cellWrite) {
+                    cell.isNote=false
+                    cell.value=number
+                }
+                else if(!cell.isFixed && action == cellNotes) {
+                    if(!cell.isNote) {
+                        cell.isNote = true
+                        cell.value=0
+                    }
+                    cell.value= cell.value xor (1 shl number)
+                }
+                //Toast.makeText(this,"$action $number",Toast.LENGTH_SHORT).show()
             }
         }
         else {
-            Toast.makeText(this,"$action",Toast.LENGTH_SHORT).show()
+            if(!cell.isFixed && action==cellClear) {
+                cell.value=0
+            }
+            //Toast.makeText(this,"$action",Toast.LENGTH_SHORT).show()
         }
     }
 
