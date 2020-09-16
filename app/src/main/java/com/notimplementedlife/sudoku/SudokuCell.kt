@@ -6,4 +6,5 @@ class SudokuCell (_row : Int,_col : Int,fixed:Boolean = false) {
     val isFixed : Boolean = fixed
     var isNote : Boolean = false
     var value : Int = 0 // empty
+    val expectedInput = 0
 }

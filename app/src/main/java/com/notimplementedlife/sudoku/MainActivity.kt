@@ -60,14 +60,12 @@ class MainActivity : AppCompatActivity() {
                     }
                     cell.value= cell.value xor (1 shl number)
                 }
-                //Toast.makeText(this,"$action $number",Toast.LENGTH_SHORT).show()
             }
         }
         else {
             if(!cell.isFixed && action==cellClear) {
                 cell.value=0
             }
-            //Toast.makeText(this,"$action",Toast.LENGTH_SHORT).show()
         }
     }
 

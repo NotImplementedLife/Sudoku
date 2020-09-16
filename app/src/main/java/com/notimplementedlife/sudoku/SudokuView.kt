@@ -94,7 +94,8 @@ class SudokuView : View {
             val row = i / 9
             var col = i % 9
             if(!cell.isNote) {
-                canvas.drawText(cell.value.toString(),col*s9+s9*0.3f,row*s9+s9*0.75f,numberPaint0)
+                if(cell.value!=0)
+                    canvas.drawText(cell.value.toString(),col*s9+s9*0.3f,row*s9+s9*0.75f,numberPaint0)
             }
             else {
                 var k=0
