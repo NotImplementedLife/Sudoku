@@ -5,23 +5,27 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 
 
 class SudokuView : View {
-    var boardLinesColor : Int = ResourcesCompat.getColor(resources, R.color.holo_red_dark, null)
+    val boardLinesColor : Int
+    val boardLinePaint0 : Paint
+    val boardLinePaint1 : Paint
 
-    var boardLinePaint0 : Paint
-    var boardLinePaint1 : Paint
-
-    var numberPaint0 : Paint
-    var numberPaint1 : Paint
+    val numberPaintInput : Paint
+    val numberPaintFixed : Paint
+    val numberPaintNote : Paint
 
     constructor(context :Context, attributeSet : AttributeSet?) : super(context,attributeSet) {
-        val backgroundColor: Int
+        val value = TypedValue()
+        context.theme.resolveAttribute(R.attr.colorPrimary,value,true)
+        boardLinesColor = value.data
+        context.theme.resolveAttribute(R.attr.colorPrimaryDark,value,true)
 
         boardLinePaint0 = Paint()
         boardLinePaint0.color= boardLinesColor
@@ -39,15 +43,22 @@ class SudokuView : View {
         boardLinePaint1.strokeCap = Paint.Cap.ROUND
         boardLinePaint1.strokeWidth = 6F
 
-        numberPaint0 = Paint()
-        numberPaint0.color = Color.BLACK
-        numberPaint0.style = Paint.Style.FILL
-        numberPaint0.textSize = 30f
+        numberPaintInput = Paint()
+        numberPaintInput.color = Color.BLACK
+        numberPaintInput.style = Paint.Style.FILL
+        numberPaintInput.textSize = 30f
 
-        numberPaint1 = Paint()
-        numberPaint1.color = Color.BLACK
-        numberPaint1.style = Paint.Style.FILL
-        numberPaint1.textSize = 10f
+        numberPaintFixed = Paint()
+        numberPaintFixed.color = value.data
+        numberPaintFixed.style = Paint.Style.FILL
+        numberPaintFixed.textSize = 30f
+
+        Log.d("TAG","${numberPaintInput.textSize} ${numberPaintFixed.textSize}")
+
+        numberPaintNote = Paint()
+        numberPaintNote.color = Color.BLACK
+        numberPaintNote.style = Paint.Style.FILL
+        numberPaintNote.textSize = 15f
     }
 
     lateinit var board : Bitmap
@@ -80,8 +91,9 @@ class SudokuView : View {
             canvas.drawPath(vline,if(c%3==0) boardLinePaint0 else boardLinePaint1)
         }
 
-        numberPaint0.textSize = s9*0.75f
-        numberPaint1.textSize = s9*0.3f
+        numberPaintFixed.textSize = s9*0.75f
+        numberPaintInput.textSize = s9*0.75f
+        numberPaintNote.textSize = s9*0.3f
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -94,8 +106,11 @@ class SudokuView : View {
             val row = i / 9
             var col = i % 9
             if(!cell.isNote) {
-                if(cell.value!=0)
-                    canvas.drawText(cell.value.toString(),col*s9+s9*0.3f,row*s9+s9*0.75f,numberPaint0)
+                if(cell.isFixed || cell.value!=0)
+                    canvas.drawText(
+                        if (cell.isFixed) cell.expectedInput.toString() else cell.value.toString(),
+                        col*s9+s9*0.3f,row*s9+s9*0.75f,
+                        if (cell.isFixed) numberPaintFixed else numberPaintInput)
             }
             else {
                 var k=0
@@ -104,7 +119,7 @@ class SudokuView : View {
                     if(v%2==1) {
                         val r=(k-1)/3
                         val c=(k-1)%3
-                        canvas.drawText(k.toString(),col*s9+0.08f*s9+c*0.3f*s9,row*s9+(r+1)*0.3f*s9,numberPaint1)
+                        canvas.drawText(k.toString(),col*s9+0.08f*s9+c*0.3f*s9,row*s9+(r+1)*0.3f*s9,numberPaintNote)
                     }
                     v/=2
                     k++
@@ -113,7 +128,7 @@ class SudokuView : View {
         }
     }
 
-    val cells : Array<SudokuCell> = Array(81) {i -> SudokuCell(i / 9,i % 9) }
+    var cells : Array<SudokuCell> = Array(81) {i -> SudokuCell(i / 9,i % 9) }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {

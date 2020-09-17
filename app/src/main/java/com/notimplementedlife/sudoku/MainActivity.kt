@@ -1,10 +1,12 @@
 package com.notimplementedlife.sudoku
 
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -40,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
         sudokuView=findViewById(R.id.sudoku_view)
         sudokuView.onCellTouch= this::executeOperation
+
+       val intent=intent
+       if(intent.hasExtra("puzzle")) {
+           sudokuView.cells=intent.getSerializableExtra("puzzle") as Array<SudokuCell>
+       }
 
     }
 
