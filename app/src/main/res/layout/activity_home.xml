@@ -25,6 +25,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -32,9 +33,10 @@
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:scaleType="fitCenter"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logo"
+            app:tint="@color/colorPrimary" />
 
         <Button
             android:id="@+id/btn_new_puzzle"
@@ -42,5 +44,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New puzzle" />
+
+        <Button
+            android:id="@+id/btn_continue"
+            style="@style/AppTheme.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Continue last" />
+
+        <LinearLayout
+            android:id="@+id/levelsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:animateLayoutChanges="true"
+            android:animationCache="false"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_levels"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0"
+                android:text="Levels" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_lvl_easy"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Easy" />
+
+                <Button
+                    android:id="@+id/btn_lvl_medium"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Medium" />
+
+                <Button
+                    android:id="@+id/btn_lvl_hard"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Hard" />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

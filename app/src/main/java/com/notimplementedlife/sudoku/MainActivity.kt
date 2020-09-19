@@ -1,5 +1,6 @@
 package com.notimplementedlife.sudoku
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
@@ -48,6 +49,11 @@ class MainActivity : AppCompatActivity() {
            sudokuView.cells=intent.getSerializableExtra("puzzle") as Array<SudokuCell>
        }
 
+    }
+
+    override fun onStop() {
+        //this.openFileOutput(".last", Context.MODE_PRIVATE).use {
+        super.onStop()
     }
 
     lateinit var sudokuView : SudokuView

@@ -5,11 +5,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 
 
 class SudokuView : View {
@@ -53,8 +51,6 @@ class SudokuView : View {
         numberPaintFixed.style = Paint.Style.FILL
         numberPaintFixed.textSize = 30f
 
-        Log.d("TAG","${numberPaintInput.textSize} ${numberPaintFixed.textSize}")
-
         numberPaintNote = Paint()
         numberPaintNote.color = Color.BLACK
         numberPaintNote.style = Paint.Style.FILL
@@ -71,7 +67,6 @@ class SudokuView : View {
         board = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(board)
         var s:Float=(1f*minOf(width,height))-25
-        Toast.makeText(context,"$width $height $s",Toast.LENGTH_LONG).show();
         translateX=(width-s)*0.5f-6
         translateY=(height-s)*0.5f
         canvas.translate(translateX,translateY)
