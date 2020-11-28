@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
+        sudokuView.saveAsLast()
+        Toast.makeText(this,"saved!",Toast.LENGTH_LONG).show();
         //this.openFileOutput(".last", Context.MODE_PRIVATE).use {
         super.onStop()
     }

@@ -125,6 +125,10 @@ class SudokuView : View {
 
     var cells : Array<SudokuCell> = Array(81) {i -> SudokuCell(i / 9,i % 9) }
 
+    fun saveAsLast() {
+        FileUtils.writeLastPuzzle(context,cells)
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
@@ -142,4 +146,6 @@ class SudokuView : View {
     }
 
     var onCellTouch :((cell:SudokuCell)->Unit)? = null
+
+
 }
